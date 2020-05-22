@@ -47,7 +47,7 @@ class WellKnownSTS(
 @Component
 class STSService(
         private val securityTokenExchangeBasicAuthRestTemplate: RestTemplate,
-        private val wellKnownStsRestTemplate: RestTemplate = RestTemplate(),
+        private val wellKnownStsRestTemplate: RestTemplate,
         @Autowired(required = false) private val metricsHelper: MetricsHelper = MetricsHelper(SimpleMeterRegistry())
 ) {
 

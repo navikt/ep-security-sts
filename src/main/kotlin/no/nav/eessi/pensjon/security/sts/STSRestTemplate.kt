@@ -44,4 +44,10 @@ class STSRestTemplate {
                     requestFactory = BufferingClientHttpRequestFactory(SimpleClientHttpRequestFactory())
                 }
     }
+
+    @Bean
+    fun wellKnownStsRestTemplate(): RestTemplate {
+        logger.info("Oppretter RestTemplate for wellKnownSts")
+        return RestTemplate()
+    }
 }
