@@ -19,6 +19,8 @@ jobs:
       
     - name: build and update version
       run: ./gradlew build release -Prelease.useAutomaticVersion=true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
     - name: check out release-version
       uses: actions/checkout@v2
