@@ -62,7 +62,7 @@ class STSService(
     private lateinit var getSystemOidcToken: MetricsHelper.Metric
 
     @PostConstruct
-    fun initMetrics() {
+    fun discoverEndpoints() {
         disoverSTS = metricsHelper.init("disoverSTS")
         getSystemOidcToken = metricsHelper.init("getSystemOidcToken")
 

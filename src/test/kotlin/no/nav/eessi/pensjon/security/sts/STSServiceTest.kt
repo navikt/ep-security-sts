@@ -49,7 +49,7 @@ class STSServiceTest {
 
         stsService = STSService(stsRestTemplate, wellknownStsRestTemplate)
         stsService.discoveryUrl = "http://bogus"
-        stsService.initMetrics()
+        stsService.discoverEndpoints()
     }
 
     @Test
