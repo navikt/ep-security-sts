@@ -64,6 +64,7 @@ dependencies {
     implementation("io.micrometer:micrometer-registry-prometheus:1.4.2")
     implementation("no.nav.eessi.pensjon:ep-metrics:0.3.6")
     implementation("no.nav.eessi.pensjon:ep-logging:0.0.12")
+    implementation("org.hibernate:hibernate-validator:6.1.5.Final")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("org.springframework:spring-test:$springVersion")
