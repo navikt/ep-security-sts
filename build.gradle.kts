@@ -6,11 +6,12 @@ plugins {
     `java-library`
     id("net.researchgate.release") version "2.8.1"
     `maven-publish`
-    id("org.sonarqube") version "2.8"
+    id("org.sonarqube") version "3.0"
     id("jacoco")
     id("com.adarshr.test-logger") version "2.0.0"
     id("org.jetbrains.kotlin.plugin.spring") version "1.3.72"
     id("com.github.ben-manes.versions") version "0.28.0"
+    id("se.patrikerdes.use-latest-versions") version "0.2.14"
 }
 
 group = "no.nav.eessi.pensjon"
@@ -61,14 +62,14 @@ dependencies {
     implementation("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
-    implementation("io.micrometer:micrometer-registry-prometheus:1.4.2")
-    implementation("no.nav.eessi.pensjon:ep-metrics:0.3.6")
-    implementation("no.nav.eessi.pensjon:ep-logging:0.0.12")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.5.1")
+    implementation("no.nav.eessi.pensjon:ep-metrics:0.3.8")
+    implementation("no.nav.eessi.pensjon:ep-logging:0.0.16")
     implementation("org.hibernate:hibernate-validator:6.1.5.Final")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("org.springframework:spring-test:$springVersion")
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
 }
 
