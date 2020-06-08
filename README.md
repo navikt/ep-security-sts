@@ -27,3 +27,8 @@ Dersom du er supertrygg på testene kan du forsøke en oppdatering av alle avhen
 ```
 ./gradlew dependencyCheckAnalyze && open build/reports/dependency-check-report.html
 ```
+
+## Snyk CLI
+
+Siden Snyk ikke støtter Gradle sin Kotlin DSL må sjekker kjøres fra kommandolinjen.
+Se: https://support.snyk.io/hc/en-us/articles/360003812458-Getting-started-with-the-CLI
