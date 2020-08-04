@@ -57,7 +57,6 @@ val jacksonVersion by extra("2.11.0")
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("no.nav.security:oidc-spring-support:0.2.18")
     implementation("org.apache.cxf:cxf-spring-boot-starter-jaxws:${cxfVersion}")
     implementation("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
