@@ -62,7 +62,7 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
     implementation("io.micrometer:micrometer-registry-prometheus:1.5.1")
-    implementation("no.nav.eessi.pensjon:ep-metrics:0.4.1")
+    implementation("no.nav.eessi.pensjon:ep-metrics:0.4.2")
     implementation("no.nav.eessi.pensjon:ep-logging:0.0.16")
     implementation("org.hibernate:hibernate-validator:6.1.5.Final")
 
