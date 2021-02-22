@@ -24,23 +24,22 @@ java {
 repositories {
     mavenCentral()
 
-    listOf("ep-metrics").forEach { repo ->
-        val token = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key")
-        if (token == null) throw NullPointerException("Missing token, you have to set GITHUB_TOKEN or gpr.key, see README")
-        maven {
-            url = uri("https://maven.pkg.github.com/navikt/$repo")
-            credentials {
-                username = "token"
-                password = token.toString()
-            }
+    val token = System.getenv("GITHUB_TOKEN")
+        ?: project.findProperty("gpr.key")
+        ?: throw NullPointerException("Missing token, you have to set GITHUB_TOKEN or gpr.key, see README")
+
+    maven {
+        url = uri("https://maven.pkg.github.com/navikt/maven-release")
+        credentials {
+            username = "token"
+            password = token.toString()
         }
     }
-
 }
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 tasks.withType<Test> {
@@ -62,8 +61,8 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
     implementation("io.micrometer:micrometer-registry-prometheus:1.5.1")
-    implementation("no.nav.eessi.pensjon:ep-metrics:0.4.2")
-    implementation("no.nav.eessi.pensjon:ep-logging:0.0.16")
+    implementation("no.nav.eessi.pensjon:ep-metrics:0.4.5")
+    implementation("no.nav.eessi.pensjon:ep-logging:1.0.9")
     implementation("org.hibernate:hibernate-validator:6.1.5.Final")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
