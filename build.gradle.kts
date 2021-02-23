@@ -60,7 +60,7 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
     implementation("io.micrometer:micrometer-registry-prometheus:1.5.1")
-    implementation("no.nav.eessi.pensjon:ep-metrics:0.4.5")
+    implementation("no.nav.eessi.pensjon:ep-metrics:0.4.6")
     implementation("no.nav.eessi.pensjon:ep-logging:1.0.9")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
