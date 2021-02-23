@@ -55,7 +55,6 @@ val jacksonVersion by extra("2.11.0")
 
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.apache.cxf:cxf-spring-boot-starter-jaxws:${cxfVersion}")
     implementation("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
@@ -63,12 +62,9 @@ dependencies {
     implementation("io.micrometer:micrometer-registry-prometheus:1.5.1")
     implementation("no.nav.eessi.pensjon:ep-metrics:0.4.5")
     implementation("no.nav.eessi.pensjon:ep-logging:1.0.9")
-    implementation("org.hibernate:hibernate-validator:6.1.5.Final")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
-    testImplementation("org.springframework:spring-test:$springVersion")
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
-    testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
+    testImplementation("io.mockk:mockk:1.10.0")
 }
 
 // https://github.com/researchgate/gradle-release

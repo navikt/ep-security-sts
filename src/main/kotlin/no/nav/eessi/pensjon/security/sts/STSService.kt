@@ -1,20 +1,18 @@
 package no.nav.eessi.pensjon.security.sts
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry
+import no.nav.eessi.pensjon.metrics.MetricsHelper
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpMethod
+import org.springframework.stereotype.Component
+import org.springframework.web.client.HttpStatusCodeException
+import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
 import javax.annotation.PostConstruct
-import no.nav.eessi.pensjon.metrics.MetricsHelper
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
-import org.springframework.web.client.*
-import java.lang.RuntimeException
-
 
 inline fun <reified T : Any> typeRef(): ParameterizedTypeReference<T> = object : ParameterizedTypeReference<T>() {}
 
@@ -68,17 +66,17 @@ class STSService(
 
         disoverSTS.measure {
             try {
-                logger.info("Henter STS endepunkter fra well.known " + discoveryUrl)
+                logger.info("Henter STS endepunkter fra well.known $discoveryUrl")
                     wellKnownSTS = wellKnownStsRestTemplate.exchange(discoveryUrl,
                             HttpMethod.GET,
                             null,
                             typeRef<WellKnownSTS>()).body!!
-            } catch(ex: HttpStatusCodeException) {
-                logger.error("En feil oppstod under service discovery av STS ex: $ex body: ${ex.responseBodyAsString}")
-                throw RuntimeException("En feil oppstod under service discovery av STS ex: ${ex.message} body: ${ex.responseBodyAsString}")
-            } catch(ex: Exception) {
-                logger.error("En feil oppstod under service discovery av STS ex: $ex")
-                throw RuntimeException("En feil oppstod under service discovery av STS ex: ${ex.message}")
+            } catch (ex: HttpStatusCodeException) {
+                logger.error("En feil oppstod under service discovery av STS: ", ex)
+                throw RuntimeException("En feil oppstod under service discovery av STS: ", ex)
+            } catch (ex: Exception) {
+                logger.error("En feil oppstod under service discovery av STS: ", ex)
+                throw RuntimeException("En feil oppstod under service discovery av STS: ", ex)
             }
         }
     }
@@ -92,27 +90,22 @@ class STSService(
                         .build().toUriString()
 
                 logger.info("Kaller STS for å bytte username/password til OIDC token")
-                val responseEntity = securityTokenExchangeBasicAuthRestTemplate.exchange(uri,
-                        HttpMethod.GET,
-                        null,
-                        typeRef<SecurityTokenResponse>())
+                val response = securityTokenExchangeBasicAuthRestTemplate.getForObject(
+                    uri,
+                    SecurityTokenResponse::class.java
+                )
 
-                logger.debug("SecurityTokenResponse ${mapAnyToJson(responseEntity)} ")
-                responseEntity.body!!.accessToken
-            } catch(ex: HttpStatusCodeException) {
-                logger.error("En feil oppstod under bytting av username/password til OIDC token ex: $ex body: ${ex.responseBodyAsString}")
-                throw RuntimeException("En feil oppstod under bytting av username/password til OIDC token ex: ${ex.message} body: ${ex.responseBodyAsString}")
-            } catch(ex: Exception) {
-                logger.error("En feil oppstod under bytting av username/password til OIDC token ex: $ex")
-                throw RuntimeException("En feil oppstod under bytting av username/password til OIDC token ex: ${ex.message}")
+                logger.debug("SecurityTokenResponse $response")
+
+                response!!.accessToken
+            } catch (ex: HttpStatusCodeException) {
+                logger.error("En feil oppstod under bytting av username/password til OIDC token: ", ex)
+                throw RuntimeException("En feil oppstod under bytting av username/password til OIDC token: ", ex)
+            } catch (ex: Exception) {
+                logger.error("En feil oppstod under bytting av username/password til OIDC token ex: ", ex)
+                throw RuntimeException("En feil oppstod under bytting av username/password til OIDC token: ", ex)
             }
         }
-    }
-
-    private fun mapAnyToJson(data: Any): String {
-        return jacksonObjectMapper()
-                .writerWithDefaultPrettyPrinter()
-                .writeValueAsString(data)
     }
 
 }

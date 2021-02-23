@@ -1,30 +1,30 @@
 package no.nav.eessi.pensjon.security.sts
 
-import com.nhaarman.mockitokotlin2.doThrow
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.whenever
+import io.mockk.confirmVerified
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
+import io.mockk.verify
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.ArgumentMatchers
-import org.mockito.Mock
-import org.mockito.junit.jupiter.MockitoExtension
+import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
-import java.lang.RuntimeException
 
-@ExtendWith(MockitoExtension::class)
+@ExtendWith(MockKExtension::class)
 class STSServiceTest {
 
-    @Mock
+    @MockK
     private lateinit var stsRestTemplate: RestTemplate
 
-    @Mock
+    @MockK
     private lateinit var wellknownStsRestTemplate: RestTemplate
 
     private lateinit var stsService: STSService
@@ -37,38 +37,50 @@ class STSServiceTest {
                 "endpoint",
                 "jwks",
                 listOf("support"))
-        val re = ResponseEntity.ok().body(wellKnownResponse)
 
-        whenever(wellknownStsRestTemplate.exchange(
-                ArgumentMatchers.anyString(),
-                eq(HttpMethod.GET),
-                eq(null),
-                eq(typeRef<WellKnownSTS>()))
-        ).thenReturn(re)
-
+        every {
+            wellknownStsRestTemplate.exchange(
+                any<String>(),
+                HttpMethod.GET,
+                null,
+                any<ParameterizedTypeReference<WellKnownSTS>>()
+            )
+        } returns ResponseEntity.ok().body(wellKnownResponse)
 
         stsService = STSService(stsRestTemplate, wellknownStsRestTemplate)
         stsService.discoveryUrl = "http://bogus"
         stsService.discoverEndpoints()
     }
 
+    @AfterEach
+    fun afterEach() {
+        verify(exactly = 1) {
+            wellknownStsRestTemplate.exchange(
+                any<String>(),
+                HttpMethod.GET,
+                null,
+                any<ParameterizedTypeReference<WellKnownSTS>>()
+            )
+        }
+
+        verify(exactly = 1) {
+            stsRestTemplate.getForObject(any<String>(), SecurityTokenResponse::class.java)
+        }
+
+        confirmVerified(wellknownStsRestTemplate, stsRestTemplate)
+    }
+
     @Test
     fun getSystemOidcToken_withValidToken() {
-
         val mockSecurityTokenResponse = SecurityTokenResponse(
                 accessToken = "LKUITDKUo96tyfhj",
                 tokenType = "sts",
                 expiresIn = 10L
         )
 
-        val response = ResponseEntity.ok().body(mockSecurityTokenResponse)
-
-        whenever(stsRestTemplate.exchange(
-                ArgumentMatchers.anyString(),
-                eq(HttpMethod.GET),
-                eq(null),
-                eq(typeRef<SecurityTokenResponse>()))
-        ).thenReturn(response)
+        every {
+            stsRestTemplate.getForObject(any<String>(), SecurityTokenResponse::class.java)
+        } returns mockSecurityTokenResponse
 
         val result = stsService.getSystemOidcToken()
 
@@ -77,13 +89,9 @@ class STSServiceTest {
 
     @Test
     fun getSystemOidcToken_withError() {
-
-        whenever(stsRestTemplate.exchange(
-                ArgumentMatchers.anyString(),
-                eq(HttpMethod.GET),
-                eq(null),
-                eq(typeRef<SecurityTokenResponse>()))
-        ).doThrow(HttpClientErrorException(HttpStatus.BAD_REQUEST))
+        every {
+            stsRestTemplate.getForObject(any<String>(), SecurityTokenResponse::class.java)
+        } throws HttpClientErrorException(HttpStatus.BAD_REQUEST)
 
         assertThrows<RuntimeException> {
             stsService.getSystemOidcToken()
