@@ -89,7 +89,7 @@ class STSService(
                         .queryParam("scope", "openid")
                         .build().toUriString()
 
-                logger.info("Kaller STS for å bytte username/password til OIDC token")
+                logger.debug("Kaller STS for å bytte username/password til OIDC token")
                 val response = securityTokenExchangeBasicAuthRestTemplate.getForObject(
                     uri,
                     SecurityTokenResponse::class.java

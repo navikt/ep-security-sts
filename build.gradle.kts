@@ -46,17 +46,15 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-val springVersion by extra("5.2.5.RELEASE")
 val junitVersion by extra("5.6.2")
-val cxfVersion by extra("3.3.6")
 val mockitoVersion by extra("3.3.3")
 val jacksonVersion by extra("2.11.0")
+val springBootVersion by extra("2.3.9.RELEASE")
 
 
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-    implementation("org.apache.cxf:cxf-spring-boot-starter-jaxws:${cxfVersion}")
-    implementation("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
     implementation("io.micrometer:micrometer-registry-prometheus:1.5.1")
