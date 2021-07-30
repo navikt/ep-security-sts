@@ -2,14 +2,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.4.30"
+    id("org.jetbrains.kotlin.jvm") version "1.5.21"
     `java-library`
     id("net.researchgate.release") version "2.8.1"
     `maven-publish`
     id("org.sonarqube") version "3.0"
     id("jacoco")
     id("com.adarshr.test-logger") version "2.0.0"
-    id("org.jetbrains.kotlin.plugin.spring") version "1.4.30"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.5.21"
     id("com.github.ben-manes.versions") version "0.28.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.14"
 }
@@ -49,7 +49,7 @@ tasks.withType<Test> {
 val junitVersion by extra("5.6.2")
 val mockitoVersion by extra("3.3.3")
 val jacksonVersion by extra("2.11.0")
-val springBootVersion by extra("2.3.9.RELEASE")
+val springBootVersion by extra("2.5.3")
 
 
 dependencies {
