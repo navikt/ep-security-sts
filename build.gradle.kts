@@ -2,16 +2,17 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.5.21"
+    id("org.jetbrains.kotlin.jvm") version "1.6.0"
     `java-library`
     id("net.researchgate.release") version "2.8.1"
     `maven-publish`
-    id("org.sonarqube") version "3.0"
+    id("org.sonarqube") version "3.3"
     id("jacoco")
-    id("com.adarshr.test-logger") version "2.0.0"
-    id("org.jetbrains.kotlin.plugin.spring") version "1.5.21"
-    id("com.github.ben-manes.versions") version "0.28.0"
-    id("se.patrikerdes.use-latest-versions") version "0.2.14"
+    id("com.adarshr.test-logger") version "3.1.0"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.6.0"
+    id("com.github.ben-manes.versions") version "0.39.0"
+    id("se.patrikerdes.use-latest-versions") version "0.2.18"
+    id("org.owasp.dependencycheck") version "6.5.0.1"
 }
 
 group = "no.nav.eessi.pensjon"
@@ -46,10 +47,9 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-val junitVersion by extra("5.6.2")
-val mockitoVersion by extra("3.3.3")
-val jacksonVersion by extra("2.11.0")
-val springBootVersion by extra("2.5.3")
+val junitVersion by extra("5.8.2")
+val jacksonVersion by extra("2.13.0")
+val springBootVersion by extra("2.6.1")
 
 
 dependencies {
@@ -57,12 +57,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
-    implementation("io.micrometer:micrometer-registry-prometheus:1.5.1")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.8.1")
     implementation("no.nav.eessi.pensjon:ep-metrics:0.4.9")
     implementation("no.nav.eessi.pensjon:ep-logging:1.0.12")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
-    testImplementation("io.mockk:mockk:1.10.0")
+    testImplementation("io.mockk:mockk:1.12.1")
 }
 
 // https://github.com/researchgate/gradle-release
