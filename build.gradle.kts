@@ -2,14 +2,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.6.0"
+    id("org.jetbrains.kotlin.jvm") version "1.6.10"
     `java-library`
     id("net.researchgate.release") version "2.8.1"
     `maven-publish`
     id("org.sonarqube") version "3.3"
     id("jacoco")
     id("com.adarshr.test-logger") version "3.1.0"
-    id("org.jetbrains.kotlin.plugin.spring") version "1.6.0"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.6.10"
     id("com.github.ben-manes.versions") version "0.39.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
     id("org.owasp.dependencycheck") version "6.5.0.1"
@@ -58,8 +58,8 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
     implementation("io.micrometer:micrometer-registry-prometheus:1.8.1")
-    implementation("no.nav.eessi.pensjon:ep-metrics:0.4.9")
-    implementation("no.nav.eessi.pensjon:ep-logging:1.0.12")
+    implementation("no.nav.eessi.pensjon:ep-metrics:0.4.12")
+    implementation("no.nav.eessi.pensjon:ep-logging:1.0.14")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("io.mockk:mockk:1.12.1")
