@@ -24,7 +24,7 @@ jobs:
         java-version: 11
 
     - name: build and update version
-      run: ./gradlew build release -Prelease.useAutomaticVersion=true
+      run: ./gradlew build release --stacktrace -Prelease.useAutomaticVersion=true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
@@ -34,6 +34,6 @@ jobs:
         ref: "release-${{ env.VERSION }}"
 
     - name: publish package
-      run: ./gradlew publish --info
+      run: ./gradlew publish --stacktrace --info
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

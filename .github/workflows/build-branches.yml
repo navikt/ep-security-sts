@@ -19,6 +19,6 @@ jobs:
         java-version: 11
 
     - name: Build
-      run: ./gradlew build
+      run: ./gradlew build --stacktrace
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
