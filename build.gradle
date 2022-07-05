@@ -2,7 +2,6 @@
 buildscript {
     ext {
         springBootVersion = '2.6.6'
-        junitVersion = '5.8.2'
         prometheusVersion = '1.8.2'
         kotlinVersion = '1.6.10'
         mockkVersion = '1.12.2'
@@ -71,7 +70,8 @@ dependencies {
     implementation("no.nav.eessi.pensjon:ep-metrics:$epMetricsVersion")
     implementation("no.nav.eessi.pensjon:ep-logging:$epLoggingVersion")
 
-    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    testImplementation(platform("org.junit:junit-bom:5.8.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("io.mockk:mockk:$mockkVersion")
 }
 
