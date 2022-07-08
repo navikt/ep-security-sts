@@ -60,7 +60,7 @@ compileTestKotlin {
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.7.10"))
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:${kotlinVersion}"))
 
     // Spring-boot BOM-fil spesifiserer versjoner for Spring Boot-avhengigheter
     implementation(platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}"))
