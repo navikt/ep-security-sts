@@ -1,7 +1,6 @@
 package no.nav.eessi.pensjon.security.sts
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import no.nav.eessi.pensjon.metrics.MetricsHelper
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -46,7 +45,7 @@ class WellKnownSTS(
 class STSService(
         private val securityTokenExchangeBasicAuthRestTemplate: RestTemplate,
         private val wellKnownStsRestTemplate: RestTemplate,
-        @Autowired(required = false) private val metricsHelper: MetricsHelper = MetricsHelper(SimpleMeterRegistry())
+        @Autowired(required = false) private val metricsHelper: MetricsHelper = MetricsHelper.ForTest()
 ) {
 
     private val logger = LoggerFactory.getLogger(STSService::class.java)
