@@ -4,7 +4,7 @@ buildscript {
         springBootVersion = '2.7.3'
         jacksonVersion = '2.13.4'
         epMetricsVersion = '0.5.13'
-        epLoggingVersion = '1.0.41'
+        epLoggingVersion = '1.0.44'
         mockkVersion = '1.12.5'
     }
 }
