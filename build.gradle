@@ -3,7 +3,7 @@ buildscript {
     ext {
         springBootVersion = '2.7.4'
         jacksonVersion = '2.13.4'
-        epMetricsVersion = '0.5.16'
+        epMetricsVersion = '0.5.19'
         epLoggingVersion = '1.0.47'
         mockkVersion = '1.12.5'
     }
