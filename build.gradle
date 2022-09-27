@@ -1,7 +1,7 @@
 
 buildscript {
     ext {
-        springBootVersion = '2.7.3'
+        springBootVersion = '2.7.4'
         jacksonVersion = '2.13.4'
         epMetricsVersion = '0.5.16'
         epLoggingVersion = '1.0.44'
