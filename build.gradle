@@ -29,10 +29,3 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("io.mockk:mockk:$mockkVersion")
 }
-
-// https://github.com/researchgate/gradle-release
-release {
-    git {
-        requireBranch.set('main')
-    }
-}
