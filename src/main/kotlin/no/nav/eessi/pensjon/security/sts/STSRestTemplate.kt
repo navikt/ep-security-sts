@@ -4,6 +4,7 @@ import io.micrometer.core.instrument.MeterRegistry
 import no.nav.eessi.pensjon.logging.RequestIdHeaderInterceptor
 import no.nav.eessi.pensjon.logging.RequestResponseLoggerInterceptor
 import no.nav.eessi.pensjon.metrics.RequestCountInterceptor
+import no.nav.eessi.pensjon.shared.retry.IOExceptionRetryInterceptor
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -39,6 +40,7 @@ class STSRestTemplate {
         return templateBuilder
                 .additionalInterceptors(
                         RequestIdHeaderInterceptor(),
+                        IOExceptionRetryInterceptor(),
                         RequestCountInterceptor(meterRegistry),
                         BasicAuthenticationInterceptor(username, password),
                         RequestResponseLoggerInterceptor()
