@@ -5,7 +5,6 @@ buildscript {
         jacksonVersion = '2.14.1'
         epMetricsVersion = '1.0.1'
         epLoggingVersion = '1.1.6'
-        mockkVersion = '1.13.2'
     }
 }
 
@@ -28,5 +27,5 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation("io.mockk:mockk:1.13.2")
 }
