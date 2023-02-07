@@ -1,9 +1,7 @@
 
 buildscript {
     ext {
-        springBootVersion = '2.7.5'
         jacksonVersion = '2.14.1'
-        epLoggingVersion = '1.1.16'
     }
 }
 
@@ -14,15 +12,21 @@ group = "no.nav.eessi.pensjon"
 
 dependencies {
     // Spring-boot BOM-fil spesifiserer versjoner for Spring Boot-avhengigheter
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}"))
+    implementation(platform("org.springframework:spring-framework-bom:6.0.4"))
+    implementation("org.springframework:spring-web")
+    implementation("org.springframework:spring-context")
+
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.0.2"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.yaml:snakeyaml:1.33") // Pga https://security.snyk.io/package/maven/org.yaml:snakeyaml
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    implementation("no.nav.eessi.pensjon:ep-metrics:1.0.11")
     implementation("io.micrometer:micrometer-registry-prometheus:1.10.2")
-    implementation("no.nav.eessi.pensjon:ep-logging:$epLoggingVersion")
+    implementation("jakarta.servlet:jakarta.servlet-api:6.0.0")
+
+    implementation("no.nav.eessi.pensjon:ep-metrics:1.0.12")
+    implementation("no.nav.eessi.pensjon:ep-logging:1.1.17")
 
     testImplementation(platform("org.junit:junit-bom:5.9.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
