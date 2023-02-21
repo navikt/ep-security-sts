@@ -1,7 +1,7 @@
 
 buildscript {
     ext {
-        jacksonVersion = '2.14.1'
+        jacksonVersion = '2.14.2'
     }
 }
 
