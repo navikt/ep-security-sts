@@ -16,7 +16,7 @@ dependencies {
     implementation("org.springframework:spring-web")
     implementation("org.springframework:spring-context")
 
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.0.2"))
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.0.3"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.yaml:snakeyaml:1.33") // Pga https://security.snyk.io/package/maven/org.yaml:snakeyaml
 
