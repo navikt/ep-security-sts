@@ -1,7 +1,6 @@
 package no.nav.eessi.pensjon.security.sts
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import jakarta.annotation.PostConstruct
 import no.nav.eessi.pensjon.metrics.MetricsHelper
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -45,24 +44,17 @@ class WellKnownSTS(
 class STSService(
         private val securityTokenExchangeBasicAuthRestTemplate: RestTemplate,
         private val wellKnownStsRestTemplate: RestTemplate,
+        @Value("\${securityTokenService.discoveryUrl}") var discoveryUrl: String,
         @Autowired(required = false) private val metricsHelper: MetricsHelper = MetricsHelper.ForTest()
 ) {
 
     private val logger = LoggerFactory.getLogger(STSService::class.java)
-
-    @Value("\${securityTokenService.discoveryUrl}")
-    lateinit var discoveryUrl: String
+    private var disoverSTS: MetricsHelper.Metric = metricsHelper.init("disoverSTS")
+    private var getSystemOidcToken: MetricsHelper.Metric = metricsHelper.init("getSystemOidcToken")
 
     lateinit var wellKnownSTS: WellKnownSTS
 
-    private lateinit var disoverSTS: MetricsHelper.Metric
-    private lateinit var getSystemOidcToken: MetricsHelper.Metric
-
-    @PostConstruct
-    fun discoverEndpoints() {
-        disoverSTS = metricsHelper.init("disoverSTS")
-        getSystemOidcToken = metricsHelper.init("getSystemOidcToken")
-
+    init {
         disoverSTS.measure {
             try {
                 logger.info("Henter STS endepunkter fra well.known $discoveryUrl")
