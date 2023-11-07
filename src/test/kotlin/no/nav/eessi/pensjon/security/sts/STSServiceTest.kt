@@ -47,9 +47,8 @@ class STSServiceTest {
             )
         } returns ResponseEntity.ok().body(wellKnownResponse)
 
-        stsService = STSService(stsRestTemplate, wellknownStsRestTemplate)
+        stsService = STSService(stsRestTemplate, wellknownStsRestTemplate, "bogus")
         stsService.discoveryUrl = "http://bogus"
-        stsService.discoverEndpoints()
     }
 
     @AfterEach

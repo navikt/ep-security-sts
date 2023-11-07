@@ -24,7 +24,7 @@ internal class STSServiceIT {
 
     private val securityExchangeRestTemplate = createSecurityExchangeRestTemplate()
 
-    private val stsService = spyk(STSService(securityExchangeRestTemplate, wellKnownRestMock))
+    private val stsService = spyk(STSService(securityExchangeRestTemplate, wellKnownRestMock, "bogusUrl"))
 
     @BeforeEach
     fun beforeEach() {
@@ -38,7 +38,6 @@ internal class STSServiceIT {
         } returns ResponseEntity.ok(WellKnownSTS("issuer", stsBaseUrl, "exchangeTokenEndpoint", "jwksUri", emptyList()))
 
         stsService.discoveryUrl = ""
-        stsService.discoverEndpoints()
     }
 
     @Test
