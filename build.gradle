@@ -1,9 +1,13 @@
 
 buildscript {
     ext {
+        kotlinVersion = '1.9.22'
         jacksonModuleKotlinVersion = '2.16.0'
         springBootVersion = '3.1.5'
     }
+}
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "$kotlinVersion"
 }
 
 apply from: "buildSrc/ep-module.gradle"
