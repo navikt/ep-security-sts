@@ -27,7 +27,7 @@ dependencies {
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonModuleKotlinVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonModuleKotlinVersion")
-    implementation("io.micrometer:micrometer-registry-prometheus:1.12.5")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.13.0")
     implementation("jakarta.servlet:jakarta.servlet-api:6.0.0")
 
     implementation("no.nav.eessi.pensjon:ep-metrics:2.0.62")
