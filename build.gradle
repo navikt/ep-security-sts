@@ -17,7 +17,7 @@ group = "no.nav.eessi.pensjon"
 
 dependencies {
     // Spring-boot BOM-fil spesifiserer versjoner for Spring Boot-avhengigheter
-    implementation(platform("org.springframework:spring-framework-bom:6.1.10"))
+    implementation(platform("org.springframework:spring-framework-bom:6.1.11"))
     implementation("org.springframework:spring-web")
     implementation("org.springframework:spring-context")
 
