@@ -32,7 +32,7 @@ dependencies {
 
     implementation("no.nav.eessi.pensjon:ep-metrics:2.0.86")
     implementation("no.nav.eessi.pensjon:ep-logging:2.1.83")
-    testImplementation(platform("org.junit:junit-bom:5.11.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation(platform("org.junit:junit-bom:$jupiterVersion"))
+    testImplementation("org.junit.jupiter:junit-jupiter:$jupiterVersion")
     testImplementation("io.mockk:mockk:1.13.13")
 }
