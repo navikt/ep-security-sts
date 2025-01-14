@@ -31,7 +31,7 @@ dependencies {
     implementation("jakarta.servlet:jakarta.servlet-api:6.1.0")
 
     implementation("no.nav.eessi.pensjon:ep-metrics:2.0.94")
-    implementation("no.nav.eessi.pensjon:ep-logging:2.2.0")
+    implementation("no.nav.eessi.pensjon:ep-logging:2.2.2")
     
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
     testImplementation("io.mockk:mockk:1.13.16")
