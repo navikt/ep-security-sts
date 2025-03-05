@@ -2,7 +2,6 @@
 buildscript {
     ext {
         kotlinVersion = '2.1.10'
-        jacksonModuleKotlinVersion = '2.18.2'
         springBootVersion = '3.4.3'
     }
 }
@@ -25,7 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.yaml:snakeyaml:2.4") // Pga https://security.snyk.io/package/maven/org.yaml:snakeyaml
 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.3")
 
     implementation("io.micrometer:micrometer-registry-prometheus:1.14.4")
     implementation("jakarta.servlet:jakarta.servlet-api:6.1.0")
